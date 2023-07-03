@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} home {% endblock %}
+{% block content %}
+<style>
+    .section{
+    height: 95vh;
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url("{% static 'images/home.jpg' %}");
+    background-position: center;
+    background-size: cover;
+}
+</style>
+<div class="section" >
+    {% for msg in messages %}
+<div class="alert alert-{{msg.level_tag}} alert-dismissible fade show  name" role="alert" >
+  <strong> {{msg.message}}</strong>
+  <button type="button" class="btn-close name1" data-bs-dismiss="alert" aria-label="close"></button>
+</div>
+
+{% endfor %}
+<h1>PRIME APARTMENTS</h1>
+<h2 style="text-align: center; font-size: 45px; color: greenyellow;"> <span style="color: orange;">15% Discount</span> for all of you </h2>
+<p>Welcome to the perfect home for your next chapter! Discover your dream rental with our exceptional selection of houses that combine comfort, style and convenience.Your perfect rental home awaits! Start your journey with us today and embrace the comfort and luxury you deserve.Welcome to a world of endless possibilities</p>
+{% if request.user.is_authenticated %}
+{% else %}
+<button class="btn"><a href="{% url 'register' %}">Get started</a></button>
+{% endif %}
+<div class="shape"></div>
+<div class="shapes"></div>
+
+<div class="gif">
+ <img src="{% static 'images/gif2.gif' %}" width="200" alt="">
+</div>
+<div class="gif2">
+  <img src="{% static 'images/gif3.gif' %}" width="200" alt="">
+ </div>
+</div>
+{% endblock %}

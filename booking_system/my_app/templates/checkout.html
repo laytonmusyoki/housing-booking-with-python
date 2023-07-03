@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<style>
+    input{
+        width: 100%;
+        height: 35px;
+        margin: 5px auto;
+        outline: none;
+        border: 2px solid #555;
+        border-radius: 5px;
+    }
+    select{
+        width: 100%;
+        margin: 5px auto;
+        height: 35px;
+        border: 2px solid #555;
+        border-radius: 5px;
+    }
+    label{
+        font-weight: bold;
+        color: teal;
+    }
+    .content h3{
+        color: rgb(57, 4, 4);
+    }
+    .content h3 span{
+        color: teal;
+        font-weight: 600;
+        font-size: 20px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="elements">
+                <div class="content">
+                     {% if forms %} 
+                     <h4 style="text-align: center;color: teal;">Last order history</h4>
+                     <div class="table-responsive">
+                     <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>Floor</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Date Booked</th>
+                        </tr>
+                        {% for form in forms %}
+                        <tr>
+                            <td>{{form.floors}}</td>
+                            <td>{{form.description}}</td>
+                            <td>{{form.amount|floatformat:2}}</td>
+                            <td>{{form.date_booked}}</td>
+                        </tr>
+                        {% endfor %}
+                     </table>
+                    </div>
+                {% else %}
+               <h1 style="text-align: center;">You have not yet Booked</h1>
+               {% endif %} 
+               </div>
+                
+                
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="elements">
+                <h4 style="text-align: center;color: teal;">Place order </h4>
+                {% for msg in messages %}
+                <div class="alert alert-{{msg.level_tag}} alert-dismissible fade show  name" role="alert" >
+                <strong> {{msg.message}}</strong>
+                <button type="button" class="btn-close name1" data-bs-dismiss="alert" aria-label="close"></button>
+                </div>
+
+                {% endfor %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {% for forms in form  %}
+                    {{forms.label}}:
+                    {{forms}}
+                    {% endfor %}
+                    <button type="submit" class="btn btn-outline-success">Book Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %} Update {% endblock %}
+
+
+{% block content %}
+<style>
+    .add .box1{
+    width: 800px;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-shadow: hsl(0, 0%,80%)0 0 16px;
+    background: #ffffff;
+    padding: 10px;
+}
+@media (max-width:780px){
+    .add .box1{
+        width: 370px;
+        
+    } 
+}
+   @media (min-width:780px)and(max-width:1023px){
+    .add .box1{
+        width: 470px;
+        
+    } 
+}
+input{
+    width: 100%;
+    height: 40px;
+    margin: 7px 0;
+}
+select{
+    width: 100%;
+    height: 40px;
+}
+</style>
+
+<div class="add">
+    <div class="box1">
+        <h1 style="color:#555;text-align: center;">Add House</h1>
+        <form action="" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        {% for form in forms %}
+        {{form.label}}:
+        {{form}}
+        {% endfor %}
+        <button type="submit" class="btn btn-success" >Update House</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

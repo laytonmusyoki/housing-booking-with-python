@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Houses{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 style="text-align: center;color: #555; margin: 20px;">Our Houses</h1>
+    <div class="row">
+        {% for house in houses %}
+        <div class="col-lg-4">
+            <div class="thumbnail">
+                <img src="{{house.ImageUrl}}" height="250" alt="">
+            </div>
+            <div class="elements">
+                <h3><strong>{{house.name}}</strong></h3>
+                <hr>
+                <a href="{% url 'book' house.id %}"class="btn btn-outline-success">Book</a>
+                <a href="" class="btn btn-outline-secondary">View</a>
+                <h5 style="float: right;"><strong>Ksh {{house.amount|floatformat:2}}</strong></h5>
+            </div>
+        </div>
+       {% endfor %}
+    </div>
+</div>
+{% endblock %}

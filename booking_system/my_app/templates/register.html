@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Register {% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="box" >
+        <h2 style="text-align: center; color: #555; padding: 20px 10px; background: white; border-radius: 10px;">PRIME<span style="color: orange;">APARTMENTS</span></h2>
+
+         {% if form.errors %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+                    {% for key, error in form.errors.items %}
+                                    <strong>{{ error }}</strong>
+                        {% endfor %}
+      <button type="button" class="btn-close name1" data-bs-dismiss="alert" aria-label="close"></button>
+  </div>
+
+    {% endif %}
+                
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.username.label}}
+            {{form.username}}
+            {{form.email.label}}
+            {{form.email}}
+            {{form.password1.label}}
+            {{form.password1}}
+            {{form.password2.label}}
+            {{form.password2}}
+            <button type="submit" class="btn btn-success">Sign Up</button>
+            <p>Already have an account? <a href="{% url 'signin' %}">Login</a></p>
+        </form>
+    </div>
+    <div class="shape"></div>
+<div class="shapes"></div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %} Login {% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="box" >
+        <h2 style="text-align: center; color: #555; padding: 20px 10px; background: white; border-radius: 10px;">PRIME<span style="color: orange;">APARTMENTS</span></h2>
+        {% for msg in messages %}
+        <div class="alert alert-{{msg.level_tag}} alert-dismissible fade show  name" role="alert" >
+          <strong> {{msg.message}}</strong>
+          <button type="button" class="btn-close name1" data-bs-dismiss="alert" aria-label="close"></button>
+      </div>
+    
+        {% endfor %}
+        <form action="" method="POST">
+            {% csrf_token %}
+           <input type="text" placeholder="Enter username" name="username" style="margin: 10px 0;">
+           <input type="password" placeholder="Enter password" name="password" style="margin: 10px 0;">
+           <div class="center" style="display: flex;align-items: center; justify-content: space-between;">
+            <button type="submit" class="btn btn-success">Login</button>
+            <a href="{% url 'reset_password' %}" >Forgot password?</a>
+           </div>
+            <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+        </form>
+    </div>
+    <div class="shape"></div>
+<div class="shapes"></div>
+</div>
+
+{% endblock %}

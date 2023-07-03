@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %} Admin{% endblock %}
+
+
+{% block content %}
+<style>
+    body{
+        background:#eae6e6;
+    }
+    h1{
+        color: #ffffff;
+    }
+    .bttns{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.col-lg-12 .elements{
+    box-shadow: hsl(0, 0%,80%)0 0 16px;
+    padding: 10px;
+    background: #fff;
+}
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="elements" style="background: orange;border-radius: 10px;">
+            <h3 style="text-align: center; color: green;"><strong>Total Orders</strong></h3>
+            <hr>
+            <h1 style="text-align: center;">{{orders}}</h1>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="elements" style="background: red; border-radius: 10px;">
+                <h3 style="text-align: center; color: orange;"><strong>Total Houses</strong></h3>
+                <hr>
+                <h1 style="text-align: center;">{{houses}}</h1>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="elements" style="background: green;border-radius: 10px;">
+                <h3 style="text-align: center;color: red;"><strong>Bedsitters</strong></h3>
+                <hr>
+                <div class="bttns">
+                    <button class="btn btn-primary">Total <br><h1 style="text-align: center;">{{total_sitter}}</h1></button>
+                    <button class="btn btn-warning">Booked <br><h1 style="text-align: center;">{{bedsitter}}</h1></button>
+                    <button class="btn btn-danger">Vaccant <br><h1 style="text-align: center;">{{vacant_sitter}}</h1></button>
+                 </div>
+               
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="elements" style="background: Blue;border-radius: 10px;">
+                <h3 style="text-align: center;color: limegreen;"><strong>Two bedrooms</strong></h3>
+                <hr>
+             <div class="bttns">
+                <button class="btn btn-primary">Total <br><h1 style="text-align: center;">{{total_two}}</h1></button>
+                <button class="btn btn-warning">Booked <br><h1 style="text-align: center;">{{two_bedrooms}}</h1></button>
+                <button class="btn btn-danger">Vaccant <br><h1 style="text-align: center;">{{vacant_two}}</h1></button>
+             </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="elements" style="background:teal ;border-radius: 10px;">
+                <h3 style="text-align: center;color: lavender;"><strong>Three bedrooms</strong></h3>
+                <hr>
+                <div class="bttns">
+                    <button class="btn btn-primary">Total <br><h1 style="text-align: center;">{{total_three}}</h1></button>
+                    <button class="btn btn-warning">Booked <br><h1 style="text-align: center;">{{three_bedrooms}}</h1></button>
+                    <button class="btn btn-danger">Vaccant <br><h1 style="text-align: center;">{{vacant_three}}</h1></button>
+                 </div>
+                
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="elements" style="background: limegreen;border-radius: 10px;">
+                <h3 style="text-align: center;color: royalblue;"><strong>Four bedrooms</strong></h3>
+                <hr>
+                <div class="bttns">
+                    <button class="btn btn-primary">Total <br><h1 style="text-align: center;">{{total_four}}</h1></button>
+                    <button class="btn btn-warning">Booked <br><h1 style="text-align: center;">{{four_bedrooms}}</h1></button>
+                    <button class="btn btn-danger">Vaccant <br><h1 style="text-align: center;">{{vacant_four}}</h1></button>
+                 </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="elements">
+            <h3 style="text-align: center;color: #555;">House management</h3>
+            <a href="{% url 'addpage' %}" class="btn btn-outline-success">Add House</a>
+            
+            {% for msg in messages %}
+            <div class="alert alert-{{msg.level_tag}} alert-dismissible fade show  name" role="alert" >
+            <strong> {{msg.message}}</strong>
+            <button type="button" class="btn-close name1" data-bs-dismiss="alert" aria-label="close"></button>
+            </div>
+            {% endfor %}
+
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <tr style="font-size:18px; font-weight: bold; color: rgb(174, 25, 25);">
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                    {% for house in house_no %}
+                    <tr>
+                        <td><img src="{{house.ImageUrl}}" height="80" width="150"></td>
+                        <td>{{house.name}}</td>
+                        <td>Ksh {{house.amount|floatformat:2}}</td>
+                        <td class="text-center">
+                            <a href="{% url 'update' house.id %}" class="btn btn-primary">Update</a>
+                            <a href="{% url 'deletepage' house.id %}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
